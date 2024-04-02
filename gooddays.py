@@ -2,12 +2,13 @@
 
 import datetime
 import parsedatetime as pdt
+import jpholiday
 import locale
 
 locale.setlocale(locale.LC_TIME, "ja_JP.UTF-8")
 
 start = "April 8, 2024"
-end = "April 26, 2024"
+end = "April 30, 2024"
 slots = ["1限目", "2限目", "3限目", "4限目", "5限目"]
 
 cal = pdt.Calendar()
@@ -17,7 +18,7 @@ end_date, _ = cal.parseDT(end)
 def date_range(start, end):
 	current = start
 	while current <= end:
-		if current.weekday() < 5:
+		if current.weekday() < 5 and not jpholiday.is_holiday(current):
 			yield current
 		current += datetime.timedelta(days=1)
 
