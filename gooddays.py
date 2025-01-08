@@ -9,17 +9,21 @@ import jpholiday
 import locale
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-s", "--start", type=str, help="Start")
-parser.add_argument("-e", "--end", type=str, help="End")
+parser.add_argument("-s", "--start", type=str, help="Start", default="today")
+parser.add_argument("-e", "--end", type=str, help="End", default="tomorrow")
+parser.add_argument("-l", "--slots", type=str, help="Slots", default="1,2,3,4,5")
+parser.add_argument("-f", "--format", type=str, help="Format", default="{} {}")
 args = parser.parse_args()
 
 locale.setlocale(locale.LC_TIME, "ja_JP.UTF-8")
 
 start = args.start
 end = args.end
+slots = args.slots
+format_str = args.format
 
 # 各候補日のスロット（ここを書き換えて下さい）
-slots = [f"{n}限目" for n in range(1, 6)]
+slot_list = slots.split(",")
 
 cal = pdt.Calendar()
 start_date, _ = cal.parseDT(start)
@@ -34,5 +38,5 @@ def date_range(start, end):
 
 for d in date_range(start_date, end_date):
 	dd = d.strftime("%m/%d (%a)")
-	for s in slots:
-		print("{} {}".format(dd, s))
+	for s in slot_list:
+		print(format_str.format(dd, s))
