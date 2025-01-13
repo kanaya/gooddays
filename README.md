@@ -49,7 +49,7 @@ $ python3 gooddays.py --start tomorrow --end  "next friday" --slots "09, 10, 11"
 
 例："時間目", "時台"
 
-## 出力例
+## 使用例
 
 入力：
 
