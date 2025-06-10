@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoodDays Scheduler</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GoodDays Scheduler</h1>
+        <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" value="">
+        </div>
+        <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" value="">
+        </div>
+        <div class="form-group">
+            <label for="slots">Slots (comma-separated):</label>
+            <input type="text" id="slots" value="1,2,3,4,5">
+        </div>
+        <div class="form-group">
+            <label for="suffix">Suffix:</label>
+            <input type="text" id="suffix" value="時限目">
+        </div>
+        <div class="form-group">
+            <label for="format">Format:</label>
+            <input type="text" id="format" value="{} {}{}">
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="noholiday">
+                Exclude Holidays
+            </label>
+        </div>
+        <button id="generate">Generate</button>
+        <div id="output" class="output"></div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

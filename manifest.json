@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "GoodDays Scheduler",
+  "version": "1.0",
+  "description": "Generate date slots excluding weekends and holidays",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
