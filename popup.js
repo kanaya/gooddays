@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const generateButton = document.getElementById('generate');
     const outputDiv = document.getElementById('output');
+    const outputText = document.getElementById('output-text');
+    const copyButton = document.getElementById('copy-button');
 
     generateButton.addEventListener('click', function() {
         const startDate = new Date(document.getElementById('startDate').value);
@@ -11,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const noholiday = document.getElementById('noholiday').checked;
 
         if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-            outputDiv.textContent = 'Please select valid dates';
+            outputText.textContent = 'Please select valid dates';
             return;
         }
 
@@ -48,11 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return holidays.some(holiday => holiday.month === month && holiday.day === day);
         }
 
-        // Generate date range
+        // Generate the output
         for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
-            if (noholiday && (date.getDay() >= 5 || isHoliday(date))) {
-                continue;
-            }
+            if (noholiday && isHoliday(date)) continue;
             
             const formattedDate = date.toLocaleDateString('ja-JP', {
                 month: '2-digit',
@@ -67,6 +67,23 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        outputDiv.textContent = output;
+        outputText.textContent = output;
+    });
+
+    // Add copy functionality
+    copyButton.addEventListener('click', function() {
+        const textToCopy = outputText.textContent;
+        if (textToCopy) {
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    copyButton.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copy to Clipboard';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        }
     });
 });
